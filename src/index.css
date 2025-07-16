@@ -1,0 +1,35 @@
+/* index.css for Tailwind v4 */
+@import "tailwindcss/preflight";
+@import "tailwindcss/utilities";
+
+/* ✅ Global base styles (Tailwind v4 compatible) */
+body {
+  font-family: 'Inter', sans-serif;
+  color: #111827; /* textPrimary */
+  background-color: #ffffff;
+}
+
+/* ✅ Utility classes using raw values (since @apply + theme() is deprecated in v4) */
+.btn {
+  padding: 12px 16px; /* px-md py-sm */
+  background-color: #1D4ED8; /* primary */
+  color: white;
+  border-radius: 10px; /* rounded-md */
+  font-weight: 600;
+  display: inline-block;
+}
+
+.card {
+  padding: 24px; /* p-lg */
+  border-radius: 16px;
+  background-color: white;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+}
+
+.text-secondary {
+  color: #6B7280; /* textSecondary */
+}
+
+.mt-section {
+  margin-top: 40px; /* 2xl spacing */
+}
