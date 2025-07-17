@@ -34,7 +34,7 @@ const Header = () => {
         </nav>
         {/* Login Button & Theme Toggle */}
         <div className="flex items-center gap-2">
-          <button
+          {/* <button
             onClick={toggleTheme}
             aria-label="Toggle theme"
             className="rounded-full p-2 bg-white/10 hover:bg-primary-600/20 transition-colors focus:outline-none focus:ring-2 focus:ring-primary-400"
@@ -44,7 +44,7 @@ const Header = () => {
             ) : (
               <svg className="w-6 h-6 text-indigo-500" fill="none" stroke="currentColor" strokeWidth={2} viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" d="M21 12.79A9 9 0 1111.21 3a7 7 0 109.79 9.79z" /></svg>
             )}
-          </button>
+          </button> */}
           <a
             href="#"
             className="text-white dark:text-white light:text-neutral-900 font-semibold text-base hover:text-primary-300 transition-colors px-2 py-1 rounded focus:outline-none focus:ring-2 focus:ring-primary-400"

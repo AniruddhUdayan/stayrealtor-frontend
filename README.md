@@ -27,17 +27,33 @@ This project showcases 5 distinct tasks, each highlighting different aspects of 
 
 ```
 src/
+├── assets/
+│   └── react.svg
 ├── components/
-│   ├── Task1/
-│   │   └── OTPVerification.jsx
-│   ├── Task2/
-│   │   └── LoadingStates.jsx
-│   ├── Task3/
-│   │   └── ImageOptimization.jsx
-│   ├── Task4/
-│   │   └── InactiveUI.jsx
-│   └── Task5/
-│       └── Dashboard.jsx
+│   ├── Header.jsx
+│   ├── Footer.jsx
+│   ├── TooltipWrapper.jsx
+│   ├── GridOverlay.jsx
+│   ├── StatCard.jsx
+│   ├── ImageCard.jsx
+│   ├── RemovedComponentPlaceholder.jsx
+│   ├── DisabledButton.jsx
+│   ├── SkeletonTable.jsx
+│   ├── SkeletonCard.jsx
+│   └── LoadingSpinner.jsx
+├── screens/
+│   ├── Dashboard/
+│   │   └── index.jsx
+│   ├── InactiveUI/
+│   │   └── index.jsx
+│   ├── ImageOptimization/
+│   │   └── index.jsx
+│   ├── LoadingStates/
+│   │   └── index.jsx
+│   └── OTPVerification/
+│       └── index.jsx
+├── service/
+│   └── otp.js
 ├── App.jsx
 ├── main.jsx
 └── index.css
@@ -47,118 +63,61 @@ src/
 
 ### Task 1: OTP Verification UX Flow
 
-**Features:**
-- 6-digit OTP input with auto-focus navigation
-- SMS verification with 30-second timeout
-- Automatic fallback to Voice OTP option
-- Auto-fill support for pasted codes
-- Real-time validation and error handling
-- Mock API simulation with realistic delays
+**How I tackled it:**
+- Built a multi-step OTP flow with a phone number sign-in, 6-digit OTP input, and a success dialog.
+- Implemented SMS OTP with a 30s timer and automatic fallback to Voice OTP (call) if SMS is delayed.
+- Added Web OTP API support for mobile web: the OTP auto-fills if received via SMS on supported browsers.
+- Enhanced UX with auto-focus, paste support, error handling, and a modern, mobile-friendly UI.
+- All states (loading, error, success) are visually distinct and accessible.
 
-**Key UX Considerations:**
-- Clear visual feedback for each state
-- Accessibility support with proper ARIA labels
-- Mobile-optimized input handling
-- Graceful error recovery
+**File:** `src/screens/OTPVerification/index.jsx`
 
-**File:** `src/components/Task1/OTPVerification.jsx`
+---
 
 ### Task 2: Loading State Implementation
 
-**Features:**
-- Skeleton loaders for cards and tables
-- Multiple spinner variations (sm, md, lg, xl)
-- Button loading states with inline spinners
-- Responsive skeleton components
-- Mock API calls with realistic delays
-- Property listings and user management demos
+**How I tackled it:**
+- Created a skeleton loader grid that matches the real estate theme, with animated placeholders for cards.
+- After loading, real estate property cards are shown, each with agent avatars, property details, and a "Register" button.
+- The "Register" button shows a loading spinner and a success animation when clicked, all within the card.
+- The design is responsive and visually consistent with the app’s dark/light theme.
 
-**Performance Benefits:**
-- Perceived performance improvement
-- Reduced bounce rates during loading
-- Better user engagement
-- Clear loading state communication
+**File:** `src/screens/LoadingStates/index.jsx`
 
-**File:** `src/components/Task2/LoadingStates.jsx`
+---
 
 ### Task 3: Image Optimization Audit
 
-**Before vs After Comparison:**
+**How I tackled it:**
+- Built a side-by-side (and later toggleable) image comparison UI to show original vs. optimized images.
+- Used WebP and SVG for optimized images, with metrics and best practices explained in the UI.
+- The section is styled for clarity, with a modern, dark theme and real estate branding.
+- Included a summary of performance impact and optimization techniques.
 
-| Aspect | Poor Quality | Optimized |
-|--------|-------------|-----------|
-| Format | JPEG | WebP |
-| File Size | 450-680KB | 95-120KB |
-| Quality | 25-30% | 80-85% |
-| Load Time | 3+ seconds | <1 second |
-| Compression | High artifacts | Clean, optimized |
+**File:** `src/screens/ImageOptimization/index.jsx`
 
-**Performance Impact:**
-- **73-86% file size reduction**
-- **60-70% faster load times**
-- **Improved Core Web Vitals**
-- **Better mobile experience**
-- **Reduced bandwidth costs**
-
-**Implementation Features:**
-- Live image load time measurement
-- Side-by-side quality comparison
-- Performance metrics visualization
-- Best practices documentation
-- Code examples for responsive images
-
-**File:** `src/components/Task3/ImageOptimization.jsx`
+---
 
 ### Task 4: Inactive/Non-Functional UI Components
 
-**Disabled Button States:**
-- Form validation with conditional enabling
-- Tooltip explanations for disabled states
-- Feature availability restrictions
-- Permission-based button states
-- Visual feedback with appropriate styling
+**How I tackled it:**
+- Designed a prominent disabled button with a custom, pill-shaped tooltip (dark, centered, no icon) that matches the reference image.
+- Added a "Feature Removed" card with an alternative action, styled for clarity and focus.
+- All states are visually distinct, accessible, and consistent with the app’s theme.
 
-**Removed Component Patterns:**
-- Live Chat Widget (maintenance placeholder)
-- Interactive Map (API limitation handling)
-- Social Media Sharing (privacy compliance)
-- Advanced Search (redesign in progress)
+**File:** `src/screens/InactiveUI/index.jsx`
 
-**Best Practices Demonstrated:**
-- Clear user communication
-- Alternative action suggestions
-- Consistent disabled state styling
-- Helpful tooltip explanations
-- Feature toggle implementations
+---
 
-**File:** `src/components/Task4/InactiveUI.jsx`
+### Task 5: UI Consistency & Dashboard Grid
 
-### Task 5: UI Consistency & Alignment Audit
+**How I tackled it:**
+- Rebuilt the dashboard with a dark sidebar/topbar, animated stat cards, deployments list, and activity feed, all themed for real estate.
+- Sidebar icons are visible and the layout is fully responsive, with a hamburger menu for mobile.
+- Used a strict 4/8pt grid system for all spacing, padding, and layout.
+- Added a real estate–themed overview section and ensured all elements are visually consistent and accessible.
 
-**4/8pt Grid System:**
-- `xs: 4px` - Micro spacing
-- `sm: 8px` - Small spacing  
-- `md: 16px` - Medium spacing
-- `lg: 24px` - Large spacing
-- `xl: 32px` - Extra large spacing
-- `2xl: 48px` - Section spacing
-
-**Dashboard Features:**
-- Interactive grid overlay (toggle with "Show 8px Grid")
-- Consistent spacing throughout
-- Visual hierarchy with typography scales
-- Responsive grid layouts
-- Mock charts and data visualization
-- Activity feeds and property listings
-
-**Design System Elements:**
-- Comprehensive color palette
-- Typography scale with proper line heights
-- Border radius system (4px increments)
-- Shadow system for depth
-- Icon consistency and sizing
-
-**File:** `src/components/Task5/Dashboard.jsx`
+**File:** `src/screens/Dashboard/index.jsx`
 
 ## 🎨 Design System
 
