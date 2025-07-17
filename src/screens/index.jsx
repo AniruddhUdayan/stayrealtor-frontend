@@ -70,16 +70,25 @@ function OverviewContent() {
         style={{ backgroundImage: `url(${HERO_BG})` }}
       >
         <div className="absolute inset-0 bg-hero-overlay" />
+        {/* Animated floating real estate SVG */}
+        <div className="absolute right-8 bottom-8 hidden md:block animate-float z-20 pointer-events-none">
+          <svg width="120" height="80" viewBox="0 0 120 80" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <rect x="10" y="40" width="100" height="30" rx="6" fill="#fff" fillOpacity="0.9" />
+            <rect x="30" y="25" width="60" height="25" rx="4" fill="#6366f1" fillOpacity="0.8" />
+            <rect x="50" y="10" width="20" height="20" rx="3" fill="#a5b4fc" fillOpacity="0.8" />
+            <rect x="60" y="55" width="10" height="15" rx="2" fill="#fbbf24" fillOpacity="0.8" />
+          </svg>
+        </div>
         <div className="relative z-10 flex flex-col items-center justify-center w-full max-w-2xl px-4 text-center">
-          <h1 className="text-4xl md:text-6xl font-extrabold tracking-tight text-white mb-4 drop-shadow-xl">
+          <h1 className="text-4xl md:text-6xl font-extrabold tracking-tight text-white mb-4 drop-shadow-xl animate-fade-in-down">
             One Place For Everything
           </h1>
-          <p className="text-lg md:text-xl text-neutral-200 mb-6 max-w-xl mx-auto">
+          <p className="text-lg md:text-xl text-neutral-200 mb-6 max-w-xl mx-auto animate-fade-in-up delay-100">
             A smart digital account with built-in tools and features that simplify real estate brokerage business.
           </p>
           <a
             href="#"
-            className="inline-flex items-center justify-center px-8 py-3 rounded-full bg-primary-600 text-white font-semibold text-base shadow-lg hover:bg-primary-700 transition-colors focus:outline-none focus:ring-2 focus:ring-primary-400 mb-8"
+            className="inline-flex items-center justify-center px-8 py-3 rounded-full bg-primary-600 text-white font-semibold text-base shadow-lg hover:bg-primary-700 transition-colors focus:outline-none focus:ring-2 focus:ring-primary-400 mb-8 animate-fade-in-up delay-200 motion-safe:animate-bounce-on-hover"
           >
             Download for Android
           </a>
@@ -92,7 +101,8 @@ function OverviewContent() {
             <Link
               key={task.id}
               to={task.to}
-              className="group bg-white/90 hover:bg-white shadow-md rounded-2xl p-6 flex flex-col h-full transition-all border border-neutral-100 hover:border-primary-200"
+              className="group bg-white/90 hover:bg-white shadow-md rounded-2xl p-6 flex flex-col h-full transition-all border border-neutral-100 hover:border-primary-200 transform-gpu motion-safe:hover:scale-[1.03] motion-safe:active:scale-95 animate-fade-in-up"
+              style={{ animationDelay: `${idx * 80 + 200}ms` }}
             >
               <div className="flex items-center mb-4">
                 <div className={`w-12 h-12 flex items-center justify-center rounded-lg ${task.color} mr-3`}>
@@ -111,6 +121,17 @@ function OverviewContent() {
           ))}
         </div>
       </section>
+      {/* Animations (add to global CSS or Tailwind config) */}
+      <style>{`
+        @keyframes fade-in-down { from { opacity: 0; transform: translateY(-24px); } to { opacity: 1; transform: none; } }
+        @keyframes fade-in-up { from { opacity: 0; transform: translateY(24px); } to { opacity: 1; transform: none; } }
+        @keyframes float { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-12px); } }
+        .animate-fade-in-down { animation: fade-in-down 0.7s cubic-bezier(.4,0,.2,1) both; }
+        .animate-fade-in-up { animation: fade-in-up 0.7s cubic-bezier(.4,0,.2,1) both; }
+        .animate-float { animation: float 3s ease-in-out infinite; }
+        .motion-safe\:animate-bounce-on-hover:hover { animation: bounce 0.7s; }
+        @keyframes bounce { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-8px); } }
+      `}</style>
     </>
   );
 }

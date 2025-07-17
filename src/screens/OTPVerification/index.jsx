@@ -48,6 +48,29 @@ const OTPVerification = () => {
     }
   }, [showDialog, navigate]);
 
+  // Autofill OTP via Web OTP API (mobile web)
+  useEffect(() => {
+    if (step !== 'otp') return;
+    let abortController;
+    if ('OTPCredential' in window && navigator.credentials) {
+      abortController = new AbortController();
+      navigator.credentials.get({
+        otp: { transport: ['sms'] },
+        signal: abortController.signal,
+      }).then(otpCredential => {
+        if (otpCredential && otpCredential.code) {
+          const code = otpCredential.code.slice(0, 6).split('');
+          setOtp(code);
+          handleVerification(otpCredential.code);
+        }
+      }).catch(() => {});
+    }
+    return () => {
+      if (abortController) abortController.abort();
+    };
+    // eslint-disable-next-line
+  }, [step]);
+
   // --- Sign In Logic ---
   const validatePhone = (phone) => /^([6-9][0-9]{9})$/.test(phone);
 
@@ -246,6 +269,7 @@ const OTPVerification = () => {
                   inputMode="numeric"
                   pattern="[0-9]*"
                   maxLength="1"
+                  autoComplete="one-time-code"
                   value={digit}
                   onChange={e => handleInputChange(index, e.target.value)}
                   onKeyDown={e => handleKeyDown(index, e)}
